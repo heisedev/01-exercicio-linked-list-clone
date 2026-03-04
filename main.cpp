@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
     cout << "Exercício de Linked List" << endl;
-    cout << "------------------------\n" << endl;
+    cout << "----------------teste--------\n" << endl;
 
     return 0;
 }
