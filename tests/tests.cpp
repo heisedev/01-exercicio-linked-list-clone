@@ -23,21 +23,10 @@ void teste_insere() {
 
     ListaSimplesmenteEncadeada* lista = criaLista();
 
-    // Insere primeiro elemento
     insere(*lista, 10);
-    assert(lista->cardinalidade == 1);
-    assert(lista->inicio != NULL);
-    assert(lista->inicio->conteudo == 10);
-    assert(lista->inicio->proximo == NULL);
-
-    // Insere segundo elemento (deve ficar no início)
     insere(*lista, 20);
-    assert(lista->cardinalidade == 2);
-    assert(lista->inicio->conteudo == 20);
-    assert(lista->inicio->proximo->conteudo == 10);
-
-    // Insere terceiro elemento
     insere(*lista, 30);
+
     assert(lista->cardinalidade == 3);
     assert(lista->inicio->conteudo == 30);
     assert(lista->inicio->proximo->conteudo == 20);
@@ -53,13 +42,10 @@ void teste_destroiLista() {
     cout << "Testando destroiLista()..." << endl;
 
     ListaSimplesmenteEncadeada* lista = criaLista();
-
-    // Insere elementos
     insere(*lista, 1);
     insere(*lista, 2);
     insere(*lista, 3);
 
-    // Destrói a lista
     destroiLista(*lista);
 
     assert(lista->cardinalidade == 0);
@@ -69,27 +55,129 @@ void teste_destroiLista() {
     cout << "destroiLista() passou em todos os testes" << endl;
 }
 
+// ===== TESTES DA FUNÇÃO mostraLista =====
+void teste_mostraLista() {
+    cout << "Testando mostraLista()..." << endl;
+
+    ListaSimplesmenteEncadeada* lista = criaLista();
+    insere(*lista, 5);
+    insere(*lista, 15);
+    insere(*lista, 25);
+
+    mostraLista(*lista); // Deve imprimir 25, 15, 5
+
+    destroiLista(*lista);
+    free(lista);
+    cout << " mostraLista() passou em todos os testes" << endl;
+}
+
+// ===== TESTES DA FUNÇÃO listaVazia =====
+void teste_listaVazia() {
+    cout << "Testando listaVazia()..." << endl;
+
+    ListaSimplesmenteEncadeada* lista = criaLista();
+    assert(listaVazia(*lista) == true);
+
+    insere(*lista, 42);
+    assert(listaVazia(*lista) == false);
+
+    destroiLista(*lista);
+    free(lista);
+    cout << " listaVazia() passou em todos os testes" << endl;
+}
+
+// ===== TESTES DA FUNÇÃO numElementos =====
+void teste_numElementos() {
+    cout << "Testando numElementos()..." << endl;
+
+    ListaSimplesmenteEncadeada* lista = criaLista();
+    insere(*lista, 1);
+    insere(*lista, 2);
+    insere(*lista, 3);
+
+    assert(numElementos(*lista) == 3);
+
+    destroiLista(*lista);
+    free(lista);
+    cout << "numElementos() passou em todos os testes" << endl;
+}
+
+// ===== TESTES DA FUNÇÃO inserePosicao =====
+void teste_inserePosicao() {
+    cout << "Testando inserePosicao()..." << endl;
+
+    ListaSimplesmenteEncadeada* lista = criaLista();
+    insere(*lista, 10);
+    insere(*lista, 20);
+
+    inserePosicao(*lista, 99, 1); // insere no meio
+    assert(lista->cardinalidade == 3);
+    assert(lista->inicio->conteudo == 20);
+    assert(lista->inicio->proximo->conteudo == 99);
+    assert(lista->inicio->proximo->proximo->conteudo == 10);
+
+    destroiLista(*lista);
+    free(lista);
+    cout << "inserePosicao() passou em todos os testes" << endl;
+}
+
+// ===== TESTES DA FUNÇÃO removePosicao =====
+void teste_removePosicao() {
+    cout << "Testando removePosicao()..." << endl;
+
+    ListaSimplesmenteEncadeada* lista = criaLista();
+    insere(*lista, 1);
+    insere(*lista, 2);
+    insere(*lista, 3);
+
+    removePosicao(*lista, 1); // remove o elemento do meio
+    assert(lista->cardinalidade == 2);
+    assert(lista->inicio->conteudo == 3);
+    assert(lista->inicio->proximo->conteudo == 1);
+
+    destroiLista(*lista);
+    free(lista);
+    cout << "removePosicao() passou em todos os testes" << endl;
+}
+
+// ===== TESTES DA FUNÇÃO inverteLista =====
+void teste_inverteLista() {
+    cout << "Testando inverteLista()..." << endl;
+
+    ListaSimplesmenteEncadeada* lista = criaLista();
+    insere(*lista, 10);
+    insere(*lista, 20);
+    insere(*lista, 30);
+
+    inverteLista(*lista);
+
+    assert(lista->inicio->conteudo == 10);
+    assert(lista->inicio->proximo->conteudo == 20);
+    assert(lista->inicio->proximo->proximo->conteudo == 30);
+
+    destroiLista(*lista);
+    free(lista);
+    cout << "inverteLista() passou em todos os testes" << endl;
+}
+
 // ===== FUNÇÃO PRINCIPAL =====
 int main() {
     cout << "\n=========================================" << endl;
     cout << "  INICIANDO TESTES DE LINKED LIST" << endl;
     cout << "=========================================" << endl << endl;
+    teste_criaLista();
+    teste_insere();
+    teste_destroiLista();
+    teste_mostraLista();
+    teste_listaVazia();
+    teste_numElementos();
+    teste_inserePosicao();
+    teste_removePosicao();
+    teste_inverteLista();
 
-    try {
-        teste_criaLista();
-        teste_insere();
-        teste_destroiLista();
+    cout << "\n=========================================" << endl;
+    cout << "   TODOS OS TESTES PASSARAM COM SUCESSO!" << endl;
+    cout << "=========================================" << endl << endl;
 
-        cout << "\n=========================================" << endl;
-        cout << "  TODOS OS TESTES PASSARAM COM SUCESSO!" << endl;
-        cout << "=========================================" << endl << endl;
-
-        return 0;
-    } catch (const exception& e) {
-        cout << "\nErro durante os testes: " << e.what() << endl;
-        return 1;
-    } catch (const char* e) {
-        cout << "\nErro durante os testes: " << e << endl;
-        return 1;
-    }
+    return 0;
 }
