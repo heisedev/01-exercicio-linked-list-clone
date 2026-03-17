@@ -1,94 +1,112 @@
-# 01 - Lista Simplesmente Encadeada (Linked List)
+01 - Lista Simplesmente Encadeada (Linked List)
+Descrição
+Exercício de implementação de uma Lista Simplesmente Encadeada em C++ com alocação dinâmica de memória.
+O projeto contempla todas as operações básicas de manipulação de listas, incluindo inserção, remoção, inversão e liberação de memória.
 
-## Descrição
-Exercício com Lista Simplesmente Encadeada (Linked List).
+Funcionalidades
+[x] Criação/Inicialização: criar uma lista vazia
+[x] Inserção: início da lista
+[x] Liberar lista (destroi): liberar a memória da lista
+[x] Mostrar lista: imprime os elementos da lista
+[x] Lista Vazia: verifica se lista está vazia
+[x] Número de Elementos: quantidade de elementos na lista
+[x] Inserção: posição específica
+[x] Remoção: elemento (node) de posição específica
+[x] Inversão: inverter os elementos da lista
 
-## Funcionalidades
-- [x] Criação/Inicialização: criar uma lista vazia
-- [x] Inserção: início da lista
-- [x] Liberar lista (destroi): Liberar a memória da lista
-- [ ] Mostrar lista: imprime os elementos da lista
-- [ ] Lista Vazia: verifica se lista está vazia
-- [ ] Número de Elementos: quantidade de elementos na lista
-- [ ] Inserção: posição específica
-- [ ] Remoção: elemento (node) de posição específica
-- [ ] Inversão: Inverter os elementos da lista
+Pré-requisitos
+Compilador C++ (g++ ou MSVC)
 
-## Pré-requisitos
+CMake (opcional, para build automatizado)
 
-## Ferramentas de Desenvolvimento
+VSCode ou outro editor de texto (opcional)
 
-- **Compilador:** GCC/G++
-- **Debugger:** GDB
-- **Editor:** Visual Studio Code (opcional)
+Ferramentas de Desenvolvimento
+Compilador: GCC/G++ ou MSVC
 
-## Instalação
+Debugger: GDB
 
-1. Clone o repositório.
-2. Certifique-se de ter o `g++` e `gdb` instalados em seu sistema.
+Editor: Visual Studio Code (opcional)
 
-# Execução
+Instalação
+Clone o repositório:
 
-## Compilação Manual
+bash
+git clone https://github.com/<SEU_USUARIO>/<NOME_REPOSITORIO>
+Certifique-se de ter g++ instalado em seu sistema.
 
+Execução
+Compilação Manual
 Para compilar o projeto manualmente via terminal:
 
-```bash
+bash
 g++ main.cpp src/linked_list.cpp -Iinclude -o main
 ./main
-```
+Depuração (Debugging)
+Via VSCode
+Abra a pasta do projeto no VSCode.
 
-## Depuração (Debugging)
+Coloque breakpoints no código.
 
-### Via VSCode (Interface Gráfica)
+Pressione F5 ou use a aba Run and Debug.
 
-O projeto já está configurado com os arquivos `.vscode/tasks.json` e `.vscode/launch.json`.
+Via CLI (GDB)
+bash
+g++ -g main.cpp src/linked_list.cpp -Iinclude -o main
+gdb ./main
+Comandos básicos:
 
-1.  Abra a pasta do projeto no VSCode.
-2.  Coloque breakpoints clicando na margem esquerda do código.
-3.  Pressione **F5** ou acesse a aba **Run and Debug** e clique em "Debug Linked List".
-4.  O VSCode irá compilar o projeto com símbolos de debug (`-g`) automaticamente antes de iniciar a sessão.
+break main → adiciona breakpoint na função principal
 
-### Via CLI (Terminal com GDB)
+run → executa o programa
 
-1.  **Compilar com símbolos de debug:**
-    ```bash
-    g++ -g main.cpp src/linked_list.cpp -Iinclude -o main
-    ```
+next → próxima linha
 
-2.  **Iniciar o GDB:**
-    ```bash
-    gdb ./main
-    ```
+print <variavel> → mostra valor da variável
 
-3.  **Comandos básicos do GDB:**
-    - `break main`: Define um ponto de parada na função principal.
-    - `run` (ou `r`): Inicia a execução do programa.
-    - `next` (ou `n`): Executa a próxima linha de código.
-    - `step` (ou `s`): Entra em uma função.
-    - `print <variavel>` (ou `p`): Exibe o valor de uma variável.
-    - `continue` (ou `c`): Continua a execução até o próximo breakpoint.
-    - `info breakpoints`: Lista todos os breakpoints.
-    - `quit` (ou `q`): Sai do GDB.
+Fluxo de Execução
+Exemplo de saída:
 
-4. **Fluxo de Exemplo**:
+Código
+-- Lista inicial --
+Conteúdo: 35
+Conteúdo: 99
+Conteúdo: 10
 
-    ```
-    (gdb) info breakpoints
-    (gdb) break main
-    (gdb) break criaLista()
-    (gdb) run
-    (gdb) next
-    (gdb) next
-    (gdb) print lista
-    (gdb) quit
-    ```
+-- Lista invertida --
+Conteúdo: 10
+Conteúdo: 99
+Conteúdo: 35
 
-## Fluxo de Testes
+Cardinalidade da Lista: 3
 
+Impressão da lista após remoção:
+Conteúdo: 10
+Conteúdo: 35
+
+Lista após destruir: cardinalidade = 0
+Fluxo de Testes
 Para compilar e rodar os testes:
 
-```bash
+bash
 g++ tests/tests.cpp src/linked_list.cpp -Iinclude -o tests_bin
 ./tests_bin
-```
+Saída esperada:
+
+Código
+=========================================
+  INICIANDO TESTES DE LINKED LIST
+=========================================
+
+✓ criaLista() passou em todos os testes
+✓ insere() passou em todos os testes
+✓ listaVazia() passou em todos os testes
+✓ numElementos() passou em todos os testes
+✓ inserePosicao() passou em todos os testes
+✓ removePosicao() passou em todos os testes
+✓ inverteLista() passou em todos os testes
+✓ destroiLista() passou em todos os testes
+
+=========================================
+  ✓ TODOS OS TESTES PASSARAM COM SUCESSO!
+=========================================
